@@ -1,7 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
 
-import { onMount, useRef } from '@huds0n/utilities';
+import { onMount, useRef, useState } from '@huds0n/utilities';
 
 import {
   handleScreenLayout,
@@ -21,6 +21,15 @@ export function ScreenManagerComponent(props: Props) {
     initialAppearance && setAppearance(initialAppearance);
   });
 
+  const [isMounted, setIsMounted] = useState(false);
+
+  onMount(
+    () => {
+      setIsMounted(true);
+    },
+    { layout: 'AFTER' },
+  );
+
   const [{ appearance }] = ScreenManagerState.useState('appearance');
 
   return (
@@ -30,12 +39,14 @@ export function ScreenManagerComponent(props: Props) {
         flex: 1,
       }}
     >
-      <View
-        //@ts-ignore
-        ref={safeAreaSizeHandlerRef}
-        onLayout={handleScreenLayout}
-        style={{ position: 'absolute', height: '100%', width: '100%' }}
-      />
+      {isMounted && (
+        <View
+          //@ts-ignore
+          ref={safeAreaSizeHandlerRef}
+          onLayout={handleScreenLayout}
+          style={{ position: 'absolute', height: '100%', width: '100%' }}
+        />
+      )}
 
       <StatusBar />
       {children}

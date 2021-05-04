@@ -25,6 +25,7 @@ export type Layout = {
   safeLeft: number;
   safeRight: number;
   safeTop: number;
+  isInitialized: boolean;
 };
 
 export type Dimensions = {
@@ -37,6 +38,7 @@ export type Dimensions = {
   screenMarginRight: number;
   screenMarginTop: number;
   screenWidth: number;
+  isInitialized: boolean;
 };
 
 export type State = Layout & { appearance: Appearance };

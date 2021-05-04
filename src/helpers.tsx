@@ -14,6 +14,7 @@ export const ScreenManagerState = new SharedState<Types.State>({
   safeLeft: 0,
   safeRight: 0,
   safeTop: 0,
+  isInitialized: false,
 });
 
 // Handle screen layout
@@ -49,6 +50,7 @@ export function handleScreenLayout({
     safeLeft: x,
     safeRight,
     safeTop,
+    isInitialized: true,
   });
 }
 
@@ -67,6 +69,7 @@ export function useDimensions(): useDimensions.Dimensions {
       safeLeft,
       safeRight,
       safeTop,
+      isInitialized,
     },
   ] = ScreenManagerState.useState([
     'appearance',
@@ -76,6 +79,7 @@ export function useDimensions(): useDimensions.Dimensions {
     'safeLeft',
     'safeRight',
     'safeTop',
+    'isInitialized',
   ]);
 
   const screenMarginBottom = appearance?.bottomBar ? safeBottom : 0;
@@ -96,6 +100,7 @@ export function useDimensions(): useDimensions.Dimensions {
     screenMarginRight,
     screenMarginTop,
     screenWidth,
+    isInitialized,
   };
 }
 

@@ -1,23 +1,15 @@
 import React from 'react';
 import { SafeAreaView, View } from 'react-native';
 
-import { onMount } from '@huds0n/utilities';
+import { onMount, useState } from '@huds0n/utilities';
 
-import {
-  handleScreenLayout,
-  setAppearance,
-  ScreenManagerState,
-  useDimensions,
-} from '../helpers';
+import { handleScreenLayout, setAppearance } from '../helpers';
 import { Props } from '../types';
 
-import { BottomBar } from './BottomBar';
-import { RightBar } from './RightBar';
-import { LeftBar } from './LeftBar';
-import { StatusBar } from './StatusBar.ios';
+import { ContentsIOS } from './contentsIOS';
 
 export function ScreenManagerComponent(props: Props) {
-  const { children, initialAppearance } = props;
+  const { initialAppearance } = props;
 
   onMount(
     () => {
@@ -26,39 +18,26 @@ export function ScreenManagerComponent(props: Props) {
     { layout: 'BEFORE' },
   );
 
-  const [appearance] = ScreenManagerState.useProp('appearance');
-  const {
-    screenMarginBottom,
-    screenMarginLeft,
-    screenMarginRight,
-    screenMarginTop,
-  } = useDimensions();
+  const [isMounted, setIsMounted] = useState(false);
+
+  onMount(
+    () => {
+      setIsMounted(true);
+    },
+    { layout: 'AFTER' },
+  );
 
   return (
     <View style={{ flex: 1 }}>
       <SafeAreaView
         style={{ position: 'absolute', height: '100%', width: '100%' }}
       >
-        <View onLayout={handleScreenLayout} style={{ flex: 1 }} />
+        {isMounted && (
+          <View onLayout={handleScreenLayout} style={{ flex: 1 }} />
+        )}
       </SafeAreaView>
 
-      <BottomBar />
-      <LeftBar />
-      <RightBar />
-      <StatusBar />
-
-      <View
-        style={{
-          backgroundColor: appearance.backgroundColor,
-          bottom: screenMarginBottom,
-          left: screenMarginLeft,
-          position: 'absolute',
-          right: screenMarginRight,
-          top: screenMarginTop,
-        }}
-      >
-        {children}
-      </View>
+      <ContentsIOS {...props} />
     </View>
   );
 }
