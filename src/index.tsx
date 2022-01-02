@@ -1,8 +1,14 @@
 import React from 'react';
 
 import { ScreenManagerComponent } from './Component';
-import { getAppearance, setAppearance, useDimensions } from './helpers';
-import { theming } from './theming';
+import {
+  appearanceOnMount,
+  getAppearance,
+  getDimensions,
+  setAppearance,
+  useDimensions,
+} from './helpers';
+
 import * as Types from './types';
 
 export namespace ScreenManager {
@@ -14,8 +20,10 @@ export namespace ScreenManager {
 }
 
 export class ScreenManager extends React.Component<ScreenManager.Props> {
-  static theming = theming;
-
+  static get dimensions() {
+    return getDimensions();
+  }
+  static appearanceOnMount = appearanceOnMount;
   static getAppearance = getAppearance;
   static setAppearance = setAppearance;
   static useDimensions = useDimensions;

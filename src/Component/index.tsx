@@ -37,6 +37,8 @@ export function ScreenManagerComponent(props: Props) {
       style={{
         backgroundColor: appearance.backgroundColor,
         flex: 1,
+        // Stops screen scrolling out of bounds on expo web
+        overflow: 'hidden',
       }}
     >
       {isMounted && (

@@ -1,30 +1,30 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { StatusBar as StatusBarRN, useColorScheme } from 'react-native';
-
-import { useEffect } from '@huds0n/utilities';
+import { colorIsDark } from '@huds0n/utilities';
 
 import { ScreenManagerState } from '../helpers';
 
 export function StatusBar() {
-  const [{ appearance }] = ScreenManagerState.useState('appearance');
+  const [
+    {
+      appearance: { statusBar, statusProps },
+    },
+  ] = ScreenManagerState.useState('appearance');
 
   const isLight = useColorScheme() === 'light';
 
-  // const color = (typeof appearance?.statusBar === 'string' && appearance.statusBar) || undefined
+  const barStyle = useMemo(() => {
+    if (statusBar ? colorIsDark(statusBar) : isLight) return 'light-content';
 
-  // useEffect(() => {
-  //   if()
-  // }, [color], {layout: 'BEFORE'})
+    return 'dark-content';
+  }, [statusBar, isLight]);
 
   return (
     <StatusBarRN
-      barStyle={isLight ? 'light-content' : 'dark-content'}
-      hidden={!appearance?.statusBar}
-      backgroundColor={
-        (typeof appearance?.statusBar === 'string' && appearance.statusBar) ||
-        undefined
-      }
-      {...appearance?.statusProps}
+      barStyle={barStyle}
+      hidden={!statusBar}
+      backgroundColor={statusBar || undefined}
+      {...statusProps}
     />
   );
 }

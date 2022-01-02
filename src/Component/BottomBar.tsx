@@ -1,7 +1,8 @@
 import React from 'react';
 import { View } from 'react-native';
 
-import { Core } from '@huds0n/core';
+import { theme } from '@huds0n/theming/src/theme';
+import { huds0nState } from '@huds0n/utilities/src/_core';
 
 import { ScreenManagerState } from '../helpers';
 
@@ -10,12 +11,9 @@ export function BottomBar() {
     'appearance',
     'safeBottom',
   ]);
-  const [{ customInputState }] = Core.useState([
-    'customInputState',
-    'darkMode',
-  ]);
+  const [inputOpen] = huds0nState.useProp('isCustomInputOpen');
 
-  const { keyboardColor } = Core.getInputColors();
+  const { KEYBOARD } = theme.colors;
 
   if (!appearance?.bottomBar) {
     return null;
@@ -24,10 +22,7 @@ export function BottomBar() {
   return (
     <View
       style={{
-        backgroundColor:
-          customInputState !== 'CLOSED'
-            ? keyboardColor
-            : appearance.bottomBar || undefined,
+        backgroundColor: inputOpen ? KEYBOARD : appearance.bottomBar,
         bottom: 0,
         height: safeBottom,
         position: 'absolute',

@@ -1,14 +1,16 @@
 import { Dimensions, LayoutChangeEvent, Platform } from 'react-native';
 
 import { SharedState } from '@huds0n/shared-state';
-import { getOrientation } from '@huds0n/utilities';
+import { getOrientation, onMount } from '@huds0n/utilities';
 
 import * as Types from './types';
 
+const screen = Dimensions.get('screen');
+
 export const ScreenManagerState = new SharedState<Types.State>({
   appearance: {},
-  deviceHeight: Dimensions.get('screen').height,
-  deviceWidth: Dimensions.get('screen').width,
+  deviceHeight: screen.height,
+  deviceWidth: screen.width,
   orientation: getOrientation(),
   safeBottom: 0,
   safeLeft: 0,
@@ -28,7 +30,7 @@ export function handleScreenLayout({
     layout: { height: safeHeight, width: safeWidth, x, y },
   },
 }: LayoutChangeEvent) {
-  const { height: deviceHeight, width: deviceWidth } = Dimensions.get('window');
+  const { height: deviceHeight, width: deviceWidth } = Dimensions.get('screen');
 
   const orientation = getOrientation();
 
@@ -54,33 +56,22 @@ export function handleScreenLayout({
   });
 }
 
-export namespace useDimensions {
+export namespace getDimensions {
   export type Dimensions = Types.Dimensions;
 }
 
-export function useDimensions(): useDimensions.Dimensions {
-  const [
-    {
-      appearance,
-      deviceHeight,
-      deviceWidth,
-      orientation,
-      safeBottom,
-      safeLeft,
-      safeRight,
-      safeTop,
-      isInitialized,
-    },
-  ] = ScreenManagerState.useState([
-    'appearance',
-    'deviceHeight',
-    'deviceWidth',
-    'safeBottom',
-    'safeLeft',
-    'safeRight',
-    'safeTop',
-    'isInitialized',
-  ]);
+export function getDimensions(): getDimensions.Dimensions {
+  const {
+    appearance,
+    deviceHeight,
+    deviceWidth,
+    orientation,
+    safeBottom,
+    safeLeft,
+    safeRight,
+    safeTop,
+    isInitialized,
+  } = ScreenManagerState.state;
 
   const screenMarginBottom = appearance?.bottomBar ? safeBottom : 0;
   const screenMarginLeft = appearance?.leftBar ? safeLeft : 0;
@@ -104,6 +95,25 @@ export function useDimensions(): useDimensions.Dimensions {
   };
 }
 
+export namespace useDimensions {
+  export type Dimensions = Types.Dimensions;
+}
+
+export function useDimensions(): useDimensions.Dimensions {
+  ScreenManagerState.useState([
+    'appearance',
+    'deviceHeight',
+    'deviceWidth',
+    'safeBottom',
+    'safeLeft',
+    'safeRight',
+    'safeTop',
+    'isInitialized',
+  ]);
+
+  return getDimensions();
+}
+
 export namespace getAppearance {
   export type Appearance = Types.Appearance;
 }
@@ -116,6 +126,19 @@ export namespace setAppearance {
   export type Appearance = Types.Appearance;
 }
 
-export function setAppearance(appearance: getAppearance.Appearance) {
+export function setAppearance(appearance: setAppearance.Appearance) {
   ScreenManagerState.setState({ appearance });
+}
+
+export namespace appearanceOnMount {
+  export type Appearance = Types.Appearance;
+}
+
+export function appearanceOnMount(appearance: appearanceOnMount.Appearance) {
+  onMount(
+    () => {
+      setAppearance(appearance);
+    },
+    { layout: 'BEFORE' },
+  );
 }
