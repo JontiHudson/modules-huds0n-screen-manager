@@ -1,18 +1,18 @@
-import React from 'react';
-import { View } from 'react-native';
+import React from "react";
+import { View } from "react-native";
 
-import { ScreenManagerState, useDimensions } from '../helpers';
-import { Props } from '../types';
+import { ScreenManagerState, useDimensions } from "../helpers";
+import type { Types } from "../types";
 
-import { BottomBar } from './BottomBar';
-import { RightBar } from './RightBar';
-import { LeftBar } from './LeftBar';
-import { StatusBar } from './StatusBar.ios';
+import { BottomBar } from "./BottomBar";
+import { RightBar } from "./RightBar";
+import { LeftBar } from "./LeftBar";
+import { StatusBar } from "./StatusBar.ios";
 
-export function ContentsIOS(props: Props) {
+export function ContentsIOS(props: Types.Props) {
   const { children } = props;
 
-  const [appearance] = ScreenManagerState.useProp('appearance');
+  const [appearance] = ScreenManagerState.useProp("appearance");
   const {
     screenMarginBottom,
     screenMarginLeft,
@@ -32,7 +32,7 @@ export function ContentsIOS(props: Props) {
           backgroundColor: appearance.backgroundColor,
           bottom: screenMarginBottom,
           left: screenMarginLeft,
-          position: 'absolute',
+          position: "absolute",
           right: screenMarginRight,
           top: screenMarginTop,
         }}

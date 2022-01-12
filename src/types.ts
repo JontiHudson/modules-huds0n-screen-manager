@@ -1,44 +1,48 @@
-import { StatusBarProps } from 'react-native';
+import { StatusBarProps } from "react-native";
 
-export type BarAppearance = string | false | null | undefined;
-export type Orientation = 'PORTRAIT' | 'LANDSCAPE';
+import { UtilityTypes } from "@huds0n/utilities";
 
-export type Appearance = {
-  backgroundColor?: string;
-  bottomBar?: BarAppearance;
-  leftBar?: BarAppearance;
-  rightBar?: BarAppearance;
-  statusBar?: BarAppearance;
-  statusProps?: StatusBarProps;
-};
+export declare namespace Types {
+  export type BarAppearance = string | false | null | undefined;
+  export type Orientation = UtilityTypes.Orientation;
 
-export type Props = {
-  children: React.ReactNode | React.ReactNode[];
-  initialAppearance?: Appearance;
-};
+  export type Appearance = {
+    backgroundColor?: string;
+    bottomBar?: BarAppearance;
+    leftBar?: BarAppearance;
+    rightBar?: BarAppearance;
+    statusBar?: BarAppearance;
+    statusProps?: StatusBarProps;
+  };
 
-export type Layout = {
-  deviceHeight: number;
-  deviceWidth: number;
-  orientation: Orientation;
-  safeBottom: number;
-  safeLeft: number;
-  safeRight: number;
-  safeTop: number;
-  isInitialized: boolean;
-};
+  export type Props = {
+    children: React.ReactNode | React.ReactNode[];
+    initialAppearance?: Appearance;
+  };
 
-export type Dimensions = {
-  deviceHeight: number;
-  deviceWidth: number;
-  orientation: Orientation;
-  screenHeight: number;
-  screenMarginBottom: number;
-  screenMarginLeft: number;
-  screenMarginRight: number;
-  screenMarginTop: number;
-  screenWidth: number;
-  isInitialized: boolean;
-};
+  export type Layout = {
+    deviceHeight: number;
+    deviceWidth: number;
+    orientation: Orientation;
+    safeBottom: number;
+    safeLeft: number;
+    safeRight: number;
+    safeTop: number;
+    isInitialized: boolean;
+  };
 
-export type State = Layout & { appearance: Appearance };
+  export type Dimensions = {
+    deviceHeight: number;
+    deviceWidth: number;
+    orientation: Orientation;
+    screenHeight: number;
+    screenMarginBottom: number;
+    screenMarginLeft: number;
+    screenMarginRight: number;
+    screenMarginTop: number;
+    screenWidth: number;
+    isInitialized: boolean;
+  };
+
+  export type State = Layout & { appearance: Appearance };
+}

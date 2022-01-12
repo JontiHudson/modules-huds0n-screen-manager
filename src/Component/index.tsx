@@ -1,18 +1,18 @@
-import React from 'react';
-import { View } from 'react-native';
+import React from "react";
+import { View } from "react-native";
 
-import { onMount, useRef, useState } from '@huds0n/utilities';
+import { onMount, useRef, useState } from "@huds0n/utilities";
 
 import {
   handleScreenLayout,
   ScreenManagerState,
   setAppearance,
-} from '../helpers';
-import { Props } from '../types';
+} from "../helpers";
+import type { Types } from "../types";
 
-import { StatusBar } from './StatusBar';
+import { StatusBar } from "./StatusBar";
 
-export function ScreenManagerComponent(props: Props) {
+export function ScreenManagerComponent(props: Types.Props) {
   const { children, initialAppearance } = props;
 
   const safeAreaSizeHandlerRef = useRef<View>();
@@ -27,10 +27,10 @@ export function ScreenManagerComponent(props: Props) {
     () => {
       setIsMounted(true);
     },
-    { layout: 'AFTER' },
+    { layout: "AFTER" }
   );
 
-  const [{ appearance }] = ScreenManagerState.useState('appearance');
+  const [{ appearance }] = ScreenManagerState.useState("appearance");
 
   return (
     <View
@@ -38,7 +38,7 @@ export function ScreenManagerComponent(props: Props) {
         backgroundColor: appearance.backgroundColor,
         flex: 1,
         // Stops screen scrolling out of bounds on expo web
-        overflow: 'hidden',
+        overflow: "hidden",
       }}
     >
       {isMounted && (
@@ -46,7 +46,7 @@ export function ScreenManagerComponent(props: Props) {
           //@ts-ignore
           ref={safeAreaSizeHandlerRef}
           onLayout={handleScreenLayout}
-          style={{ position: 'absolute', height: '100%', width: '100%' }}
+          style={{ position: "absolute", height: "100%", width: "100%" }}
         />
       )}
 

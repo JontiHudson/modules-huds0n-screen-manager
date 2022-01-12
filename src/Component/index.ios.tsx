@@ -1,21 +1,21 @@
-import React from 'react';
-import { SafeAreaView, View } from 'react-native';
+import React from "react";
+import { SafeAreaView, View } from "react-native";
 
-import { onMount, useState } from '@huds0n/utilities';
+import { onMount, useState } from "@huds0n/utilities";
 
-import { handleScreenLayout, setAppearance } from '../helpers';
-import { Props } from '../types';
+import { handleScreenLayout, setAppearance } from "../helpers";
+import type { Types } from "../types";
 
-import { ContentsIOS } from './contentsIOS';
+import { ContentsIOS } from "./contentsIOS";
 
-export function ScreenManagerComponent(props: Props) {
+export function ScreenManagerComponent(props: Types.Props) {
   const { initialAppearance } = props;
 
   onMount(
     () => {
       initialAppearance && setAppearance(initialAppearance);
     },
-    { layout: 'BEFORE' },
+    { layout: "BEFORE" }
   );
 
   const [isMounted, setIsMounted] = useState(false);
@@ -24,13 +24,13 @@ export function ScreenManagerComponent(props: Props) {
     () => {
       setIsMounted(true);
     },
-    { layout: 'AFTER' },
+    { layout: "AFTER" }
   );
 
   return (
     <View style={{ flex: 1 }}>
       <SafeAreaView
-        style={{ position: 'absolute', height: '100%', width: '100%' }}
+        style={{ position: "absolute", height: "100%", width: "100%" }}
       >
         {isMounted && (
           <View onLayout={handleScreenLayout} style={{ flex: 1 }} />

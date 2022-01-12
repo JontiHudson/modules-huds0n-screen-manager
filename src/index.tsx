@@ -1,25 +1,17 @@
-import React from 'react';
+import React from "react";
 
-import { ScreenManagerComponent } from './Component';
+import { ScreenManagerComponent } from "./Component";
 import {
   appearanceOnMount,
   getAppearance,
   getDimensions,
   setAppearance,
   useDimensions,
-} from './helpers';
+} from "./helpers";
 
-import * as Types from './types';
+import type { Types } from "./types";
 
-export namespace ScreenManager {
-  export type Appearance = Types.Appearance;
-  export type BarAppearance = Types.BarAppearance;
-  export type Dimension = Types.Dimensions;
-  export type Orientation = Types.Orientation;
-  export type Props = Types.Props;
-}
-
-export class ScreenManager extends React.Component<ScreenManager.Props> {
+export class ScreenManager extends React.Component<Types.Props> {
   static get dimensions() {
     return getDimensions();
   }
@@ -32,3 +24,5 @@ export class ScreenManager extends React.Component<ScreenManager.Props> {
     return <ScreenManagerComponent {...this.props} />;
   }
 }
+
+export type { Types as ScreenManagerTypes } from "./types";
