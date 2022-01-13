@@ -43,10 +43,10 @@ function handleScreenLayout({ nativeEvent: { layout: { height: safeHeight, width
 exports.handleScreenLayout = handleScreenLayout;
 function getDimensions() {
     const { appearance, deviceHeight, deviceWidth, orientation, safeBottom, safeLeft, safeRight, safeTop, isInitialized, } = exports.ScreenManagerState.state;
-    const screenMarginBottom = appearance?.bottomBar ? safeBottom : 0;
-    const screenMarginLeft = appearance?.leftBar ? safeLeft : 0;
-    const screenMarginRight = appearance?.rightBar ? safeRight : 0;
-    const screenMarginTop = appearance?.statusBar ? safeTop : 0;
+    const screenMarginBottom = (appearance === null || appearance === void 0 ? void 0 : appearance.bottomBar) ? safeBottom : 0;
+    const screenMarginLeft = (appearance === null || appearance === void 0 ? void 0 : appearance.leftBar) ? safeLeft : 0;
+    const screenMarginRight = (appearance === null || appearance === void 0 ? void 0 : appearance.rightBar) ? safeRight : 0;
+    const screenMarginTop = (appearance === null || appearance === void 0 ? void 0 : appearance.statusBar) ? safeTop : 0;
     const screenHeight = deviceHeight - screenMarginTop - screenMarginBottom;
     const screenWidth = deviceWidth - screenMarginLeft - screenMarginRight;
     return {
