@@ -10,7 +10,7 @@ function RightBar() {
         'appearance',
         'safeRight',
     ]);
-    if (!(appearance === null || appearance === void 0 ? void 0 : appearance.rightBar)) {
+    if (!appearance?.rightBar) {
         return null;
     }
     return (<react_native_1.View style={{

@@ -10,7 +10,7 @@ function LeftBar() {
         'appearance',
         'safeLeft',
     ]);
-    if (!(appearance === null || appearance === void 0 ? void 0 : appearance.leftBar)) {
+    if (!appearance?.leftBar) {
         return null;
     }
     return (<react_native_1.View style={{

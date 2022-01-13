@@ -14,7 +14,7 @@ function BottomBar() {
     ]);
     const [inputOpen] = _core_1.huds0nState.useProp('isCustomInputOpen');
     const { KEYBOARD } = theme_1.theme.colors;
-    if (!(appearance === null || appearance === void 0 ? void 0 : appearance.bottomBar)) {
+    if (!appearance?.bottomBar) {
         return null;
     }
     return (<react_native_1.View style={{

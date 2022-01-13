@@ -20,28 +20,40 @@ function ScreenManagerPlayground() {
           <react_native_1.Pressable style={[
             styles.button,
             { backgroundColor: statusBar ? ON_COLOR : OFF_COLOR },
-        ]} onPress={() => screen_manager_1.ScreenManager.setAppearance(Object.assign(Object.assign({}, appearance), { statusBar: statusBar ? null : STATUS_BAR_COLOR }))}>
+        ]} onPress={() => screen_manager_1.ScreenManager.setAppearance({
+            ...appearance,
+            statusBar: statusBar ? null : STATUS_BAR_COLOR,
+        })}>
             <react_native_1.Text>Status Bar</react_native_1.Text>
           </react_native_1.Pressable>
 
           <react_native_1.Pressable style={[
             styles.button,
             { backgroundColor: leftBar ? ON_COLOR : OFF_COLOR },
-        ]} onPress={() => screen_manager_1.ScreenManager.setAppearance(Object.assign(Object.assign({}, appearance), { leftBar: leftBar ? null : SIDE_BAR_COLOR }))}>
+        ]} onPress={() => screen_manager_1.ScreenManager.setAppearance({
+            ...appearance,
+            leftBar: leftBar ? null : SIDE_BAR_COLOR,
+        })}>
             <react_native_1.Text>Left Bar</react_native_1.Text>
           </react_native_1.Pressable>
 
           <react_native_1.Pressable style={[
             styles.button,
             { backgroundColor: rightBar ? ON_COLOR : OFF_COLOR },
-        ]} onPress={() => screen_manager_1.ScreenManager.setAppearance(Object.assign(Object.assign({}, appearance), { rightBar: rightBar ? null : SIDE_BAR_COLOR }))}>
+        ]} onPress={() => screen_manager_1.ScreenManager.setAppearance({
+            ...appearance,
+            rightBar: rightBar ? null : SIDE_BAR_COLOR,
+        })}>
             <react_native_1.Text>Right Bar</react_native_1.Text>
           </react_native_1.Pressable>
 
           <react_native_1.Pressable style={[
             styles.button,
             { backgroundColor: bottomBar ? ON_COLOR : OFF_COLOR },
-        ]} onPress={() => screen_manager_1.ScreenManager.setAppearance(Object.assign(Object.assign({}, appearance), { bottomBar: bottomBar ? null : BOTTOM_BAR_COLOR }))}>
+        ]} onPress={() => screen_manager_1.ScreenManager.setAppearance({
+            ...appearance,
+            bottomBar: bottomBar ? null : BOTTOM_BAR_COLOR,
+        })}>
             <react_native_1.Text>Bottom Bar</react_native_1.Text>
           </react_native_1.Pressable>
         </react_native_1.View>

@@ -9,12 +9,12 @@ class ScreenManager extends react_1.default.Component {
     static get dimensions() {
         return (0, helpers_1.getDimensions)();
     }
+    static appearanceOnMount = helpers_1.appearanceOnMount;
+    static getAppearance = helpers_1.getAppearance;
+    static setAppearance = helpers_1.setAppearance;
+    static useDimensions = helpers_1.useDimensions;
     render() {
         return <Component_1.ScreenManagerComponent {...this.props}/>;
     }
 }
 exports.ScreenManager = ScreenManager;
-ScreenManager.appearanceOnMount = helpers_1.appearanceOnMount;
-ScreenManager.getAppearance = helpers_1.getAppearance;
-ScreenManager.setAppearance = helpers_1.setAppearance;
-ScreenManager.useDimensions = helpers_1.useDimensions;
